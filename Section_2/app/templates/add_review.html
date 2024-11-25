@@ -20,7 +20,7 @@
         <!-- Dynamic Meal options in dropdown list -->
         <div class="form-group">
             <label for="meal">Meal type</label>
-            <select name="meal type" id="meal type" class="input-field" required>
+            <select name="meal" id="meal" class="input-field" required>
                 <option value="" disabled {% if not form.meal.data %}selected{% endif %}>Select a meal</option>
                 <option value="Breakfast" {% if form.meal.data == 'Breakfast' %}selected{% endif %}>Breakfast</option>
                 <option value="Brunch" {% if form.meal.data == 'Brunch' %}selected{% endif %}>Brunch</option>
