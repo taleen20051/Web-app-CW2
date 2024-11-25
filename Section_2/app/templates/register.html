@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Main container for registration page -->
+<div class="login-container">
+    <div class="login-box">
+        <!-- Registration title for form -->
+        <h1 class="login-title">Register</h1>
+
+         <!-- Registration form with username, password, and password confirmation fields -->
+        <form id="registerForm" method="POST">
+            {{ form.hidden_tag() }}
+
+            <!-- Username input Field -->
+            <div class="form-group">
+                <label for="username">{{ form.username.label }}</label>
+                {{ form.username(class="input-field", id="username", placeholder="Enter your username") }}
+            </div>
+
+            <!-- Password input Field -->
+            <div class="form-group">
+                <label for="password">{{ form.password.label }}</label>
+                {{ form.password(class="input-field", id="password", type="password", placeholder="Enter your password") }}
+            </div>
+            
+            <!-- Confirm Password input Field -->
+            <div class="form-group">
+                <label for="confirm_password">{{ form.confirm_password.label }}</label>
+                {{ form.confirm_password(class="input-field", id="confirm_password", type="password", placeholder="Confirm your password") }}
+            </div>
+
+            <!-- Show Password Checkbox -->
+            <div class="form-group">
+                <input type="checkbox" id="togglePassword"> Show Password
+            </div>
+
+            <!-- Submit Button field -->
+            <div>
+                {{ form.submit(class="btn login-btn") }}
+            </div>
+        </form>
+
+        <!-- Link to the login page -->
+        <p class="register-link">Already have an account? <a href="{{ url_for('app.login') }}">Login here</a>.</p>
+    </div>
+</div>
+{% endblock %}

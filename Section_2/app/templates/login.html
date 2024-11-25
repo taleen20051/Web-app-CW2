@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Main container section for the login page -->
+<div class="login-container">
+
+    <!-- Login box with title and form -->
+    <div class="login-box">
+        <h1 class="login-title">Sign in</h1>
+
+        <!-- Login form with username and password fields -->
+        <form id="loginForm" method="POST">
+            {{ form.hidden_tag() }}
+
+            <!-- Username input field -->
+            <div class="form-group">
+                {{ form.username.label }}
+                {{ form.username(class="input-field", placeholder="Enter your username") }}
+            </div>
+
+            <!-- Password input field -->
+            <div class="form-group">
+                {{ form.password.label }}
+                {{ form.password(class="input-field", type="password", placeholder="Enter your password") }}
+            </div>
+
+            <!-- Checkbox to make password visible to user -->
+            <div class="form-group">
+                <input type="checkbox" id="togglePassword"> Show Password
+            </div>
+
+            <!-- Submit button for the form -->
+            <div>
+                {{ form.submit(class="btn login-btn") }}
+            </div>
+        </form>
+
+         <!-- Link to the registration page for non-registered users -->
+        <p class="register-link">Don't have an account? <a href="{{ url_for('app.register') }}">Register here</a>.</p>
+    </div>
+</div>
+{% endblock %}

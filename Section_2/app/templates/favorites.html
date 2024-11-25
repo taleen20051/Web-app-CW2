@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    {% if favorites|length == 0 %}
+        <!-- Display when there are no review cards added to favorites -->
+        <div class="text-center">
+            <div class="empty-state">
+                <h2>No Favorites Yet!</h2>
+                <p>Click the heart icon on a review to add it to your favorites.</p>
+            </div>
+        </div>
+    {% else %}
+
+        <!-- Grid for users to view their favorited review cards -->
+        <div class="grid">
+            {% for review in favorites %}
+            <!-- Review card with restaurant name, meal, cuisine, comment, rating, and buttons -->
+            <div class="review-card" data-id="{{ review.id }}">
+                <!-- Review details -->
+                <h3>{{ review.name }}</h3>
+                <p><strong>Meal:</strong> {{ review.meal }}</p>
+                <p><strong>Cuisine:</strong> {{ review.cuisine }}</p>
+                <p><strong>Comment:</strong> {{ review.comment }}</p>
+                <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+                <div class="button-group">
+
+                    <!-- Link to the restaurant's website -->
+                    <a href="{{ review.website_link }}" target="_blank" class="btn btn-primary">Visit Website</a>
+
+                    <!-- Button to view the profile of the user who created the review -->
+                    <a href="{{ url_for('app.profile', username=review.user.username) }}" class="btn btn-info">View Profile</a>
+
+                    <!-- Display Edit button if the review belongs to the current user -->
+                    {% if review.user_id == current_user.id %}
+                        <a href="{{ url_for('app.edit_review', review_id=review.id) }}" class="btn btn-secondary">Edit</a>
+                        <form action="{{ url_for('app.delete_review', review_id=review.id) }}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    {% endif %}
+
+                    <!-- Button to remove review from favorites page -->
+                    <form action="{{ url_for('app.remove_from_favorites', review_id=review.id) }}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-primary">Unfavorite</button>
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

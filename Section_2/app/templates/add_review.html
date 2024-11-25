@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!-- Add/Edit review form container -->
+<div class="add-review-container">
+
+     <!-- Dynamic title for add/edit review based on edit_mode flag -->
+    <h2 class="add-review-title">{% if edit_mode %}Edit Review{% else %}Add a Review{% endif %}</h2>
+    <form method="POST" class="review-form">
+        {{ form.hidden_tag() }}
+        
+        <!-- Restaurant name input -->
+        <div class="form-group">
+            <label for="name">Restaurant</label>
+            <!-- Pre-input review data if available for editing -->
+            {{ form.name(class_="input-field", id="name", value=review.name if review else '') }}
+        </div>
+    
+        <!-- Dynamic Meal options in dropdown list -->
+        <div class="form-group">
+            <label for="meal">Meal type</label>
+            <select name="meal type" id="meal type" class="input-field" required>
+                <option value="" disabled {% if not form.meal.data %}selected{% endif %}>Select a meal</option>
+                <option value="Breakfast" {% if form.meal.data == 'Breakfast' %}selected{% endif %}>Breakfast</option>
+                <option value="Brunch" {% if form.meal.data == 'Brunch' %}selected{% endif %}>Brunch</option>
+                <option value="Lunch" {% if form.meal.data == 'Lunch' %}selected{% endif %}>Lunch</option>
+                <option value="Dinner" {% if form.meal.data == 'Dinner' %}selected{% endif %}>Dinner</option>
+            </select>
+        </div>
+    
+        <!-- Dynamic Cuisine options in dropdown list -->
+        <div class="form-group">
+            <label for="cuisine">Cuisine</label>
+            <select name="cuisine" id="cuisine" class="input-field" required>
+                <option value="" disabled {% if not form.cuisine.data %}selected{% endif %}>Select a cuisine</option>
+                <option value="American" {% if form.cuisine.data == 'American' %}selected{% endif %}>American</option>
+                <option value="Middle Eastern" {% if form.cuisine.data == 'Middle Eastern' %}selected{% endif %}>Middle Eastern</option>
+                <option value="Mexican" {% if form.cuisine.data == 'Mexican' %}selected{% endif %}>Mexican</option>
+                <option value="Italian" {% if form.cuisine.data == 'Italian' %}selected{% endif %}>Italian</option>
+                <option value="Turkish" {% if form.cuisine.data == 'Turkish' %}selected{% endif %}>Turkish</option>
+                <option value="French" {% if form.cuisine.data == 'French' %}selected{% endif %}>French</option>
+                <option value="Greek" {% if form.cuisine.data == 'Greek' %}selected{% endif %}>Greek</option>
+                <option value="Asian" {% if form.cuisine.data == 'Asian' %}selected{% endif %}>Asian</option>
+                <option value="Indian" {% if form.cuisine.data == 'Indian' %}selected{% endif %}>Indian</option>
+                <option value="Iranian" {% if form.cuisine.data == 'Iranian' %}selected{% endif %}>Iranian</option>
+            </select>
+        </div>
+    
+        <!-- Comment text entry section -->
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <!-- Pre-input review comment data if available for editing -->
+            {{ form.comment(class_="input-field", id="comment", value=review.comment if review else '') }}
+        </div>
+    
+        <!-- Rating entry out of 5-->
+        <div class="form-group">
+            <label for="rating">Rating</label>
+            <!-- Pre-input rating data if available for editing -->
+            {{ form.rating(class_="input-field", id="rating", value=review.rating if review else '') }}
+        </div>
+    
+        <!-- Restaurant website redirection URL entry -->
+        <div class="form-group">
+            <label for="website_link">Website URL</label>
+            <!-- Pre-fill the input with existing website link if available -->
+            {{ form.website_link(class_="input-field", id="website_link", value=review.website_link if review else '') }}
+        </div>
+
+        <!-- Dynamic Submit Button that shows 'Update' or 'Submit' Review -->
+        <button type="submit" class="submit-btn">{% if edit_mode %}Update Review{% else %}Submit Review{% endif %}</button>
+    </form>
+</div>
+{% endblock %}

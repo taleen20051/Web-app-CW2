@@ -1,0 +1,502 @@
+/* General Page Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-attachment: fixed;
+    justify-content: center;
+    align-items: center;
+    background: url('background1.jpg') no-repeat center center/cover;
+    background-attachment: fixed;
+    background-color: #f5f5f5;
+}
+
+/* Unified Background for Pages */
+body.dashboard-page,
+body.favorites-page,
+body.profile-page,
+body.add-review-page {
+    background: url('dashboard2.jpg') no-repeat center center/cover;
+    background-attachment: fixed;
+    background-color: #fff;
+}
+
+/* Change Review Page Background */
+body.edit-review-page {
+    background: url('dashboard2.jpg') no-repeat center center/cover;
+    background-attachment: fixed;
+    background-color: #f5f5f5;
+}
+
+/* Navigation Bar styling */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background-color: #000;
+    border-bottom: 2px solid #f9d342;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 10;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+/* Logo in Navbar styling */
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #f9d342;
+    margin-right: 20px;
+}
+
+/* Navbar Buttons and Links styling */
+.navbar .nav-link, .navbar .btn {
+    font-size: 23px;
+    color: #f9d342;
+    text-decoration: none;
+    margin: 0 32px;
+    transition: color 0.3s ease, background-color 0.3s ease, transform 0.2s ease;
+}
+
+.navbar .nav-link:hover {
+    text-decoration: underline;
+}
+
+.navbar .btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: #f9d342;
+    color: #000;
+}
+
+.navbar .btn:hover {
+    background-color: #ffffff;
+    transform: scale(1.1);
+}
+
+/* Form Container Styling */
+.form-container, .add-review-container {
+    background-color: #000;
+    color: #f9d342;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
+    text-align: center;
+    margin: auto;
+    max-width: 650px;
+    width: 90%;
+}
+
+/* Add Review Container Styling */
+.add-review-container {
+    max-width: 700px;
+    width: 100%;
+    background-color: #000;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 50px;
+    text-align: center;
+    margin: auto;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.add-review-title {
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #f9d342;
+}
+
+/* Entry Form Labels and Inputs Styling */
+.form-container label, .add-review-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 17px;
+}
+
+.input-field, .form-container input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 13px;
+}
+
+/* Submit Button Styling */
+.submit-btn {
+    background-color: #f9d342;
+    color: #000;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:hover {
+    background-color: #f5b00e;
+    color: #000;
+    transform: scale(1.05);
+}
+
+/* Grid Styling for Dashboard Layout */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 100px;
+    padding: 20px;
+}
+
+/* Entry Review Card's Styling */
+.review-card {
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+    color: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    visibility: visible;
+    opacity: 1;
+    position: relative;
+}
+
+/* Hide cards without removing them from the layout when searching */
+.review-card.hidden {
+    visibility: hidden;
+    opacity: 0;
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+/* Entry Review Card Hover Effects for titles, paragraphs, and buttons */
+.review-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.9);
+}
+
+.review-card h3 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #f9d342;
+}
+
+.review-card p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.review-card .btn {
+    padding: 10px;
+    background-color: #f9d342;
+    color: #000;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.review-card .btn:hover {
+    background-color: #fff;
+    transform: scale(1.05);
+}
+
+/* Form Group Labels Styling */
+.review-form .form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* No Favorites Box Text Message Styling*/
+.no-favorites-box {
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 10px; 
+    padding: 20px;
+    text-align: center;
+    max-width: 400px;
+    margin: 50px auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Empty State Styling for when no entries available in page */
+.empty-state {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+    top: 300px;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 500px;
+}
+
+/* Adjust Empty State for Profile Page */
+body.profile-page .empty-state {
+    position: relative;
+    top: 100px;
+    margin-top: 0;
+}
+
+/* Profile Box Styling */
+.profile-box {
+    background-color: #ffffff;
+    border: 2px solid #000000;
+    border-radius: 10px;
+    padding: 20px;
+    display: inline-block; 
+    margin: 20px auto;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 500px;
+}
+
+/* Profile Header, title, and subtitle Styling */
+.profile-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 200px;
+    margin-top: 100px;
+    position: relative;
+}
+
+.profile-title {
+    font-size: 40px;
+    font-weight: bold;
+    color: #f9d342;
+    margin-bottom: 50px;
+    margin-top: 100px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+
+.profile-subtitle {
+    font-size: 28px;
+    color: #ffffff;
+    margin-top: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); 
+}
+
+/* Login Container Styling */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: url('background1.jpg') no-repeat center center/cover;
+}
+
+/* Login Box, Title, and Buttons Styling */
+.login-box {
+    background-color: rgba(240, 239, 239, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-title {
+    color: #000000;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Login Button Styling */
+.login-btn {
+    font-size: 16px;
+    background-color: #f9d342;
+    color: #000;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-btn:hover {
+    background-color: #ffffff;
+    transform: scale(1.05);
+}
+
+/* Favorites page Styling */
+.btn-primary, .btn-info {
+    text-decoration: underline;
+    color: #000;
+    background-color: #f9d342;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Danger Button (Delete) */
+.btn-danger {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    text-decoration: underline;
+}
+
+/* Search Box, Input, and Button Styling */
+.search-form {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.search-input {
+    padding: 8px 15px;
+    border: 1px solid #f9d342;
+    border-radius: 5px 0 0 5px;
+    font-size: 14px;
+    width: 200px;
+    transition: border-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-input:focus {
+    border-color: #f5b00e;
+    outline: none;
+    transform: scale(1.02);
+}
+
+.search-btn {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    background-color: #f9d342;
+    color: #000;
+    font-weight: bold;
+    font-size: 14px;
+    margin-left: 2px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.search-btn:hover {
+    background-color: #ffd900;
+    transform: scale(1.05);
+}
+
+/* Navigation Button Styling */
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+/* Navigation Button Styling to move button left */
+.logout-btn {
+    margin-left: auto;
+}
+
+/* Highlight and Hover Styling for search button */
+body mark {
+    background-color: #f9d342;
+    color: #000;
+    border-radius: 3px;
+    padding: 2px 4px;
+}
+
+mark:hover {
+    background-color: #ffffff;
+    color: #000;
+}
+
+/* Message styling for no results after search */
+#no-results-message {
+    color: #ffffff;
+    font-size: 50px;
+    text-align: center;
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+    display: relative;
+}
+
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px);
+    padding-top: 60px;
+    text-align: center;
+}
+
+
+/* Home Page section buttons styling */
+.hero-container h1 {
+    font-size: 32px;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.hero-container p {
+    font-size: 20px;
+    color: #000000;
+    margin-bottom: 30px;
+}
+
+.button-container {
+    display: flex;
+    gap: 20px;
+}
+
+/* Hover Box for Buttons after Search */
+.hover-box {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    color: #fff;
+    background-color: #000000;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.hover-box:hover {
+    background-color: #f9d342;
+}
+
+/* Favorites page Styling */
+.favorites-page {
+    margin-top: 30px;
+    padding-top: 5px;
+}
+
+ /* Add spacing above buttons if moved down */
+.button-group .btn:last-child {
+    margin-top: 10px;
+}

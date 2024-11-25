@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata for character encoding and responsive design -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title of current page, defaults to 'Cuisine Compass' -->
+    <title>{{ title if title else 'Cuisine Compass' }}</title>
+
+    <!-- Link to the main CSS file -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+    <!-- Link to the main Javascript file -->
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</head>
+<body class="{% if request.endpoint == 'app.dashboard' %}dashboard-page
+             {% elif request.endpoint == 'app.add_review' %}add-review-page
+             {% elif request.endpoint == 'app.edit_review' %}edit-review-page
+             {% elif request.endpoint == 'app.favorites' %}favorites-page
+             {% elif request.endpoint == 'app.profile' %}profile-page
+             {% else %}default-page{% endif %}">
+    
+    <!-- Navigation bar with logo, search bar, and user authentication buttons -->
+    <nav class="navbar">
+
+        <!-- Logo section -->
+        <div class="navbar-left">
+            <div class="logo">Cuisine Compass</div>
+        </div>
+
+        <!-- Search form for only signed in user -->
+        {% if current_user.is_authenticated %}
+        <form class="search-form">
+            <input
+                type="text"
+                id="search-input"
+                class="search-input"
+                placeholder="Search..."
+            />
+            <button id="search-btn" class="search-btn" type="button">Search</button>
+        </form>
+        {% endif %}
+
+        <!-- Navigation buttons -->
+        <div class="nav-buttons">
+            {% if current_user.is_authenticated %}
+                <!-- Links visible to users on navigation bar -->
+                <a href="{{ url_for('app.dashboard') }}" class="nav-link {% if request.endpoint == 'app.dashboard' %}active{% endif %}">Dashboard</a>
+                <a href="{{ url_for('app.favorites') }}" class="nav-link {% if request.endpoint == 'app.favorites' %}active{% endif %}">Favorites</a>
+                <a href="{{ url_for('app.add_review') }}" class="nav-link {% if request.endpoint == 'app.add_review' %}active{% endif %}">Add Review</a>
+                <a href="{{ url_for('app.profile', username=current_user.username) }}" class="nav-link {% if request.endpoint == 'app.profile' %}active{% endif %}">My Profile</a>
+                <a href="{{ url_for('app.logout') }}" class="btn logout-btn">Logout</a>
+            {% else %}
+                <!-- Links visible to users before signing in -->
+                <a href="{{ url_for('app.login') }}" class="btn">Sign In</a>
+                <a href="{{ url_for('app.register') }}" class="btn">Get Started</a>
+            {% endif %}
+        </div>
+    </nav>
+    
+    <!-- Main content container -->
+    <div class="container-box">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
