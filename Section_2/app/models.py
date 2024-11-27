@@ -29,8 +29,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(200), nullable=False)
     reviews = db.relationship('Review', backref='user', lazy=True)
     # Many-to-many relationship for favorites
-    favorites = db.relationship('Review', secondary=favorites, lazy='dynamic',
-                                backref=db.backref('favorited_by', lazy=True))
+    favorites = db.relationship('Review', secondary=favorites, backref=db.backref('favorited_by', lazy='dynamic'))
 
 
 # Restaurant model for storing restaurant data

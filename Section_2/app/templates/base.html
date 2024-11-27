@@ -8,6 +8,9 @@
     <!-- Title of current page, defaults to 'Cuisine Compass' -->
     <title>{{ title if title else 'Cuisine Compass' }}</title>
 
+    <!-- Link to the favicon -->
+    <link rel="icon" href="{{ url_for('static', filename='restaurant_icon.png') }}" type="image/png">
+
     <!-- Link to the main CSS file -->
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 
@@ -51,10 +54,6 @@
                 <a href="{{ url_for('app.add_review') }}" class="nav-link {% if request.endpoint == 'app.add_review' %}active{% endif %}">Add Review</a>
                 <a href="{{ url_for('app.profile', username=current_user.username) }}" class="nav-link {% if request.endpoint == 'app.profile' %}active{% endif %}">My Profile</a>
                 <a href="{{ url_for('app.logout') }}" class="btn logout-btn">Logout</a>
-            {% else %}
-                <!-- Links visible to users before signing in -->
-                <a href="{{ url_for('app.login') }}" class="btn">Sign In</a>
-                <a href="{{ url_for('app.register') }}" class="btn">Get Started</a>
             {% endif %}
         </div>
     </nav>

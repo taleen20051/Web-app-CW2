@@ -202,11 +202,11 @@ def remove_from_favorites(review_id):
     return redirect(url_for('app.favorites'))
 
 
-# Route to retrieve all reviews saved to favorites by the user
 @app.route('/favorites')
 @login_required
 def favorites():
-    favorites = current_user.favorites.all()
+    # Directly use current_user.favorites since it's already a list-like object
+    favorites = current_user.favorites
     return render_template('favorites.html', favorites=favorites)
 
 
