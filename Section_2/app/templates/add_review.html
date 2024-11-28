@@ -29,7 +29,7 @@
             </select>
         </div>
     
-        <!-- Dynamic Cuisine options in dropdown list -->
+        <!-- Cuisine options in dropdown list -->
         <div class="form-group">
             <label for="cuisine">Cuisine</label>
             <select name="cuisine" id="cuisine" class="input-field" required>
@@ -49,7 +49,7 @@
     
         <!-- Comment text entry section -->
         <div class="form-group">
-            <label for="comment">Comment</label>
+            <label for="comment">Additional Comments</label>
             <!-- Pre-input review comment data if available for editing -->
             {{ form.comment(class_="input-field", id="comment", value=review.comment if review else '') }}
         </div>

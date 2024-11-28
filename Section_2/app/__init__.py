@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-import os
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -10,12 +9,7 @@ login_manager = LoginManager()
 # Application factory function
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'supersecretkey'
-    BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-    app.config['SQLALCHEMY_DATABASE_URI'] = (
-        f"sqlite:///{os.path.join(BASE_DIR, 'cuisine_compass.db')}"
-    )
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+    app.config.from_object('config')  # Load configurations from config.py
 
     # Initialize the database with the Flask app
     db.init_app(app)
@@ -27,7 +21,7 @@ def create_app():
     app.register_blueprint(app_blueprint)
 
     with app.app_context():
-        db.create_all()
+        db.create_all()  # Create tables in the database
 
     return app
 

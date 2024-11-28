@@ -2,12 +2,12 @@
 
 {% block content %}
 <!-- Main container for the profile page -->
-<div class="container mt-5">
+<div class="container">
 
     <!-- Profile header with user's username and subtitle text message -->
     <div class="profile-header text-center">
         <h1 class="profile-title">{{ user.username }}'s Profile</h1>
-        <p class="profile-subtitle">Here are the reviews by {{ user.username }}.</p>
+        <p class="profile-subtitle">View all {{ user.username }}'s reviews below.</p>
     </div>
 
     <!-- Check if the user has created any reviews -->
@@ -26,7 +26,7 @@
             <!-- Individual review card layout -->
             <div class="review-card" data-id="{{ review.id }}">
                 <h3>{{ review.name }}</h3>
-                <p><strong>Meal:</strong> {{ review.meal }}</p>
+                <p><strong>Meal type:</strong> {{ review.meal }}</p>
                 <p><strong>Cuisine:</strong> {{ review.cuisine }}</p>
                 <p><strong>Comment:</strong> {{ review.comment }}</p>
                 <p><strong>Rating:</strong> {{ review.rating }}/5</p> <!-- Rating out of 5 -->

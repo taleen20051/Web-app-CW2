@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     } else if (data.message === "Added to favorites") {
                         alert("Item added to your favorites!");
                     } else {
-                        alert("An unexpected error occurred.");
+                        alert("An error occurred when adding the review.");
                     }
                 })
                 .catch(() => {
@@ -66,14 +66,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then((response) => response.json())
                 .then((data) => {
                     if (data.message === "Removed from favorites") {
-                        alert("Item removed from your favorites.");
+                        alert("Item moved from your favorites.");
                         card.remove();
                     } else {
-                        alert("An unexpected error occurred.");
+                        alert("An error occurred when moving the card.");
                     }
                 })
                 .catch(() => {
-                    alert("Failed to remove from favorites. Please try again later.");
+                    alert("An error occured! Failed to remove from favorites.");
                 });
         });
     });
