@@ -236,19 +236,33 @@ def delete_review(review_id):
     return redirect(url_for('app.profile', username=current_user.username))
 
 
-# Define the search results page route
 @app.route('/search_results', methods=['GET'])
 @login_required
 def search_results():
     query = request.args.get('query', '').strip()
+
+    # If the query is empty, return an empty JSON response for AJAX
     if not query:
-        return render_template('search_results.html', reviews=[], query=query)
+        return jsonify(results=[])
 
     # Filter reviews using case-insensitive search
     results = Review.query.filter(
         (Review.name.ilike(f"%{query}%")) |
         (Review.meal.ilike(f"%{query}%")) |
-        (Review.cuisine.ilike(f"%{query}%"))
+        (Review.cuisine.ilike(f"%{query}%")) |
+        (Review.comment.ilike(f"%{query}%"))
     ).all()
 
-    return render_template('search_results.html', reviews=results, query=query)
+    # For AJAX requests, return the results as JSON
+    if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+        return jsonify(results=[{
+            'id': review.id,
+            'name': review.name,
+            'meal': review.meal,
+            'cuisine': review.cuisine,
+            'comment': review.comment,
+            'rating': review.rating
+        } for review in results])
+
+    # Otherwise, render the full template for normal requests
+    return render_template('search.html', reviews=results, query=query)
