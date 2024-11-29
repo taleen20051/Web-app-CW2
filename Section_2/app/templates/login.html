@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
 <!-- Main container section for the login page -->
 <div class="login-container">
 
@@ -13,20 +14,21 @@
             {{ form.hidden_tag() }}
 
             <!-- Username input field -->
-            <div class="form-group">
+            <div class="form-class">
                 {{ form.username.label }}
-                {{ form.username(class="input-field", placeholder="Enter your username") }}
+                {{ form.username(class="input-field", placeholder="Enter your username", id="username") }}
             </div>
 
             <!-- Password input field -->
-            <div class="form-group">
+            <div class="form-class">
                 {{ form.password.label }}
-                {{ form.password(class="input-field", type="password", placeholder="Enter your password") }}
+                {{ form.password(class="input-field password-field", type="password", placeholder="Enter your password", id="password") }}
             </div>
 
             <!-- Checkbox to make password visible to user -->
-            <div class="form-group">
-                <input type="checkbox" id="togglePassword"> Show Password
+            <div class="form-class-inline">
+                <input type="checkbox" id="togglePassword">
+                <label for="togglePassword">Show Password</label>
             </div>
 
             <!-- Submit button for the form -->
@@ -37,6 +39,8 @@
 
          <!-- Link to the registration page for non-registered users -->
         <p class="register-link">Don't have an account? <a href="{{ url_for('app.register') }}">Sign up here</a>.</p>
+        <p class="forgot-password-link">Forgot your password? <a href="{{ url_for('app.change_password') }}">Change here</a>.</p>
+    </div>
     </div>
 </div>
 {% endblock %}

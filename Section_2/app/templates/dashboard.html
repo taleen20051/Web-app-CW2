@@ -1,6 +1,8 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<!-- Main container section for the dashboard page -->
 <div class="container">
     <!-- Search Bar Container Section -->
     <div class="search-container text-center">
@@ -18,25 +20,34 @@
             </div>
         </div>
     {% else %}
+
         <!-- Grid for displaying reviews in streamline design view -->
         <div id="reviewGrid" class="grid">
             {% for review in reviews %}
 
-            <!-- Review card with restaurant name, meal, cuisine, comment, rating, and buttons -->
+            <!-- Review card layout with restaurant name, meal, cuisine, comment, rating, and buttons -->
             <div class="review-card" data-id="{{ review.id }}" data-name="{{ review.name }}" data-cuisine="{{ review.cuisine }}" data-meal="{{ review.meal }}">
                 <!-- Review details -->
                 <h3 class="review-name">{{ review.name }}</h3>
                 <p><strong>Meal type:</strong> {{ review.meal }}</p>
                 <p><strong>Cuisine:</strong> {{ review.cuisine }}</p>
+                {% if review.comment %}
                 <p><strong>Comment:</strong> {{ review.comment }}</p>
+                {% endif %}
                 <p><strong>Rating:</strong> {{ review.rating }}/5</p>
-                <div class="button-group">
+
+                <div class="button-class">
+                    {% if review.website_link %}
                     <!-- Link to the restaurant's website -->
                     <a href="{{ review.website_link }}" target="_blank" class="btn btn-primary">Visit Website</a>
+                    {% endif %}
                     
                     {% if review.user_id == current_user.id %}
-                        <!-- Edit button available only for the author of the review -->
+                        <!-- Edit and Delete buttons available only for the author of the review -->
                         <a href="{{ url_for('app.edit_review', review_id=review.id) }}" class="btn btn-secondary">Edit</a>
+                        <form action="{{ url_for('app.delete_review', review_id=review.id) }}" method="post" style="display:inline;">
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     {% endif %}
                     
                     <!-- Button to view the profile of the user who created the review -->

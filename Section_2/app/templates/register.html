@@ -8,31 +8,32 @@
         <!-- Registration title for form -->
         <h1 class="login-title">Register</h1>
 
-         <!-- Registration form with username, password, and password confirmation fields -->
+        <!-- Registration form with username, password, and password confirmation fields -->
         <form id="registerForm" method="POST">
             {{ form.hidden_tag() }}
 
             <!-- Username input Field -->
-            <div class="form-group">
+            <div class="form-class">
                 <label for="username">{{ form.username.label }}</label>
                 {{ form.username(class="input-field", id="username", placeholder="Enter your username") }}
             </div>
 
             <!-- Password input Field -->
-            <div class="form-group">
+            <div class="form-class">
                 <label for="password">{{ form.password.label }}</label>
-                {{ form.password(class="input-field", id="password", type="password", placeholder="Enter your password") }}
+                {{ form.password(class="input-field password-field", id="password", type="password", placeholder="Enter your password") }}
             </div>
             
             <!-- Confirm Password input Field -->
-            <div class="form-group">
+            <div class="form-class">
                 <label for="confirm_password">{{ form.confirm_password.label }}</label>
-                {{ form.confirm_password(class="input-field", id="confirm_password", type="password", placeholder="Confirm your password") }}
+                {{ form.confirm_password(class="input-field password-field", id="confirm_password", type="password", placeholder="Confirm your password") }}
             </div>
 
             <!-- Show Password Checkbox -->
-            <div class="form-group">
-                <input type="checkbox" id="togglePassword"> Show Password
+            <div class="form-class-inline">
+                <input type="checkbox" id="togglePassword">
+                <label for="togglePassword">Show Password</label>
             </div>
 
             <!-- Submit Button field -->

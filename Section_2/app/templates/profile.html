@@ -24,18 +24,23 @@
         <!-- Grid for displaying reviews on user's profile -->
         <div class="grid">
             {% for review in reviews %}
-            <!-- Individual review card layout -->
+
+            <!-- Separate review card layout -->
             <div class="review-card" data-id="{{ review.id }}">
                 <h3>{{ review.name }}</h3>
                 <p><strong>Meal type:</strong> {{ review.meal }}</p>
                 <p><strong>Cuisine:</strong> {{ review.cuisine }}</p>
+                {% if review.comment %}
                 <p><strong>Comment:</strong> {{ review.comment }}</p>
-                <p><strong>Rating:</strong> {{ review.rating }}/5</p> <!-- Rating out of 5 -->
+                {% endif %}
+                <p><strong>Rating:</strong> {{ review.rating }}/5</p>
 
                 <!-- Button group for website link, edit, delete, and favorite buttons -->
-                <div class="button-group">
+                <div class="button-class">
+                    {% if review.website_link %}
                     <!-- Link to the restaurant's website -->
                     <a href="{{ review.website_link }}" target="_blank" class="btn btn-primary">Visit Website</a>
+                    {% endif %}
                     
                     <!-- Edit  and delete buttons available only for the author of the review -->
                     {% if review.user_id == current_user.id %}

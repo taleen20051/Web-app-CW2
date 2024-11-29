@@ -1,11 +1,13 @@
 document.addEventListener("DOMContentLoaded", function () {
     // Password visibility toggle
-    const passwordField = document.getElementById("password");
     const togglePassword = document.getElementById("togglePassword");
-    if (togglePassword && passwordField) {
-        // Toggles password visibility when the checkbox is clicked
+    if (togglePassword) {
         togglePassword.addEventListener("change", function () {
-            passwordField.type = this.checked ? "text" : "password";
+            // Select all password fields with the class 'password-field'
+            const passwordFields = document.querySelectorAll(".password-field");
+            passwordFields.forEach((field) => {
+                field.type = this.checked ? "text" : "password";
+            });
         });
     }
 

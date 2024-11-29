@@ -11,14 +11,14 @@
         {{ form.hidden_tag() }}
         
         <!-- Restaurant name input -->
-        <div class="form-group">
+        <div class="form-class">
             <label for="name">Restaurant</label>
             <!-- Pre-input review data if available for editing -->
             {{ form.name(class_="input-field", id="name", value=review.name if review else '') }}
         </div>
     
         <!-- Dynamic Meal options in dropdown list -->
-        <div class="form-group">
+        <div class="form-class">
             <label for="meal">Meal type</label>
             <select name="meal" id="meal" class="input-field" required>
                 <option value="" disabled {% if not form.meal.data %}selected{% endif %}>Select a meal</option>
@@ -30,7 +30,7 @@
         </div>
     
         <!-- Cuisine options in dropdown list -->
-        <div class="form-group">
+        <div class="form-class">
             <label for="cuisine">Cuisine</label>
             <select name="cuisine" id="cuisine" class="input-field" required>
                 <option value="" disabled {% if not form.cuisine.data %}selected{% endif %}>Select a cuisine</option>
@@ -48,21 +48,21 @@
         </div>
     
         <!-- Comment text entry section -->
-        <div class="form-group">
+        <div class="form-class">
             <label for="comment">Additional Comments</label>
             <!-- Pre-input review comment data if available for editing -->
             {{ form.comment(class_="input-field", id="comment", value=review.comment if review else '') }}
         </div>
     
         <!-- Rating entry out of 5-->
-        <div class="form-group">
+        <div class="form-class">
             <label for="rating">Rating</label>
             <!-- Pre-input rating data if available for editing -->
             {{ form.rating(class_="input-field", id="rating", value=review.rating if review else '') }}
         </div>
     
         <!-- Restaurant website redirection URL entry -->
-        <div class="form-group">
+        <div class="form-class">
             <label for="website_link">Website URL</label>
             <!-- Pre-fill the input with existing website link if available -->
             {{ form.website_link(class_="input-field", id="website_link", value=review.website_link if review else '') }}

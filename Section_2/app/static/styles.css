@@ -124,7 +124,7 @@ body.edit-review-page {
     font-size: 17px;
 }
 
-.input-field, .form-container input {
+.form-container input {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -220,7 +220,7 @@ body.edit-review-page {
 }
 
 /* Form Group Labels Styling */
-.review-form .form-group {
+.review-form {
     margin-bottom: 20px;
     text-align: left;
 }
@@ -497,6 +497,49 @@ mark:hover {
 }
 
  /* Add spacing above buttons if moved down */
-.button-group .btn:last-child {
+.button-class .btn:last-child {
     margin-top: 10px;
+}
+
+/* Adjust Labels and Inputs for Forms */
+.form-class {
+    margin-bottom: 10px; /* Add more space between form fields */
+    display: flex;
+    flex-direction: column; /* Stack label and input vertically */
+    align-items: flex-start; /* Align labels to the left */
+}
+
+/* Ensure Labels and Inputs Are Clearly Aligned */
+.form-class label {
+    font-size: 16px; /* Increase label font size for clarity */
+    font-weight: bold;
+    margin-bottom: 10px; /* Add spacing between label and input */
+}
+
+.input-field {
+    padding: 10px;
+    font-size: 16px; /* Larger input text */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%; /* Full width for better usability */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.login-btn {
+    margin-top: 20px; /* Space above the button */
+    padding: 15px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.form-class-inline {
+    display: flex;
+    align-items: center; /* Align checkbox and label vertically */
+    gap: 8px; /* Add spacing between checkbox and label */
+    margin-top: 10px; /* Add some space above */
+}
+
+.form-class-inline input[type="checkbox"] {
+    width: auto; /* Adjust checkbox size */
+    margin: 0; /* Remove default margin */
 }

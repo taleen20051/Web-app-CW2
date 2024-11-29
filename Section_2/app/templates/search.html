@@ -18,7 +18,7 @@
                     <p><strong>Cuisine:</strong> {{ review.cuisine }}</p>
                     <p><strong>Comment:</strong> {{ review.comment }}</p>
                     <p><strong>Rating:</strong> {{ review.rating }}/5</p>
-                    <div class="button-group">
+                    <div class="button-class">
                         <a href="{{ review.website_link }}" target="_blank" class="btn btn-primary">Visit Website</a>
                         {% if current_user == review.user %}
                             <a href="{{ url_for('app.edit_review', review_id=review.id) }}" class="btn btn-secondary">Edit</a>

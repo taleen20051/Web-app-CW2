@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
+<!-- Main container section for the favorites page -->
 <div class="container">
     {% if favorites|length == 0 %}
+
         <!-- Display when there are no review cards added to favorites -->
         <div class="text-center">
             <div class="empty-state">
@@ -15,19 +18,24 @@
         <!-- Grid for users to view their favorited review cards -->
         <div class="grid">
             {% for review in favorites %}
+
             <!-- Review card with restaurant name, meal, cuisine, comment, rating, and buttons -->
             <div class="review-card" data-id="{{ review.id }}">
                 <!-- Review details -->
                 <h3>{{ review.name }}</h3>
                 <p><strong>Meal type:</strong> {{ review.meal }}</p>
                 <p><strong>Cuisine:</strong> {{ review.cuisine }}</p>
+                {% if review.comment %}
                 <p><strong>Comment:</strong> {{ review.comment }}</p>
+                {% endif %}
                 <p><strong>Rating:</strong> {{ review.rating }}/5</p>
-                <div class="button-group">
 
+                <div class="button-class">
+                    {% if review.website_link %}
                     <!-- Link to the restaurant's website -->
                     <a href="{{ review.website_link }}" target="_blank" class="btn btn-primary">Visit Website</a>
-
+                    {% endif %}
+                    
                     <!-- Button to view the profile of the user who created the review -->
                     <a href="{{ url_for('app.profile', username=review.user.username) }}" class="btn btn-info">View Profile</a>
 

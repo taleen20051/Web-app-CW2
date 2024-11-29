@@ -8,7 +8,9 @@ from flask_login import (
 from werkzeug.security import (
     generate_password_hash, check_password_hash
 )
-from .forms import LoginForm, RegisterForm, SearchForm, AddReviewForm
+from .forms import (
+    LoginForm, RegisterForm, SearchForm, AddReviewForm, ChangePasswordForm
+)
 from .models import User, Restaurant, Review
 from sqlalchemy.orm import joinedload
 from app import db
@@ -266,3 +268,32 @@ def search_results():
 
     # Otherwise, render the full template for normal requests
     return render_template('search.html', reviews=results, query=query)
+
+
+# Route for Forgot Password page
+@app.route('/change_password', methods=['GET', 'POST'])
+def change_password():
+    form = ChangePasswordForm()
+    if form.validate_on_submit():
+        username = form.username.data
+        old_password = form.old_password.data
+        new_password = form.new_password.data
+
+        # Query the user by username
+        user = User.query.filter_by(username=username).first()
+        if not user:
+            flash("Username not found.", "error")
+            return redirect(url_for('app.change_password'))
+
+        # Check if the old password matches
+        if not check_password_hash(user.password, old_password):
+            flash("Old password is incorrect.", "error")
+            return redirect(url_for('app.change_password'))
+
+        # Update the password and save to the database
+        user.password = generate_password_hash(new_password)
+        db.session.commit()
+        flash("Your password has been updated successfully.", "success")
+        return redirect(url_for('app.login'))
+
+    return render_template('change_password.html', form=form)

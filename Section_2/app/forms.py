@@ -14,7 +14,8 @@ from wtforms.validators import (  # noqa: F401
     NumberRange,
     URL,
     Optional,
-    EqualTo
+    EqualTo,
+    Email
 )
 
 
@@ -64,22 +65,18 @@ class AddReviewForm(FlaskForm):
         "Restaurant Name",
         validators=[DataRequired()]
     )
-    # Meal field with a required validator
     meal = StringField(
         "Meal",
         validators=[DataRequired()]
     )
-    # Cuisine field with a required validator
     cuisine = StringField(
         "Cuisine",
         validators=[DataRequired()]
     )
-    # Comments field with a required validator
-    comment = TextAreaField(
+    comment = TextAreaField(  # Comments are now optional
         "Comment",
-        validators=[DataRequired()]
+        validators=[Optional()]
     )
-    # Rating field with a required validator (1-5)
     rating = IntegerField(
         "Rating",
         validators=[
@@ -87,13 +84,31 @@ class AddReviewForm(FlaskForm):
             NumberRange(min=1, max=5)
         ]
     )
-    # Website URL field with a required validator
-    website_link = StringField(
+    website_link = StringField(  # Website URL is now optional
         "Website Link",
         validators=[
-            DataRequired(),
+            Optional(),
             URL()
         ]
     )
-    # Submit button for the form
     submit = SubmitField("Submit Review")
+
+
+class ChangePasswordForm(FlaskForm):
+    username = StringField('Username', validators=[DataRequired()])
+    old_password = PasswordField('Old Password', validators=[DataRequired()])
+    new_password = PasswordField(
+        'New Password',
+        validators=[
+            DataRequired(),
+            Length(min=6, message="Password must have at least 6 characters")
+        ]
+    )
+    confirm_new_password = PasswordField(
+        'Confirm New Password',
+        validators=[
+            DataRequired(),
+            EqualTo('new_password', message="Passwords must match")
+        ]
+    )
+    submit = SubmitField('Change Password')
