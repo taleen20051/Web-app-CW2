@@ -29,7 +29,11 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(200), nullable=False)
     reviews = db.relationship('Review', backref='user', lazy=True)
     # Many-to-many relationship for favorites
-    favorites = db.relationship('Review', secondary=favorites, backref=db.backref('favorited_by', lazy='dynamic'))
+    favorites = db.relationship(
+     'Review',
+     secondary=favorites,
+     backref=db.backref('favorited_by', lazy='dynamic')
+    )
 
 
 # Restaurant model for storing restaurant data
@@ -53,5 +57,5 @@ class Review(db.Model):
     comment = db.Column(db.Text, nullable=False)
     rating = db.Column(db.Integer, nullable=False)
     website_link = db.Column(db.String(200), nullable=True)
-    # Foreign key linking the review to a user
+    # Foreign key linking the review to a specific user
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

@@ -32,7 +32,7 @@ class RegisterForm(FlaskForm):
         'Username',
         validators=[
             DataRequired(),
-            Length(min=3, max=50)
+            Length(min=5, max=20)
         ]
     )
     password = PasswordField(
@@ -59,7 +59,7 @@ class SearchForm(FlaskForm):
     submit = SubmitField('Search')
 
 
-# Define the add review form class with the required fields and validators
+# Define the form class with the required fields and validators
 class AddReviewForm(FlaskForm):
     name = StringField(
         "Restaurant Name",
@@ -73,7 +73,7 @@ class AddReviewForm(FlaskForm):
         "Cuisine",
         validators=[DataRequired()]
     )
-    comment = TextAreaField(  # Comments are now optional
+    comment = TextAreaField(
         "Comment",
         validators=[Optional()]
     )
@@ -84,7 +84,7 @@ class AddReviewForm(FlaskForm):
             NumberRange(min=1, max=5)
         ]
     )
-    website_link = StringField(  # Website URL is now optional
+    website_link = StringField(
         "Website Link",
         validators=[
             Optional(),
@@ -94,6 +94,7 @@ class AddReviewForm(FlaskForm):
     submit = SubmitField("Submit Review")
 
 
+# Define the reset password form and validate input characters
 class ChangePasswordForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired()])
     old_password = PasswordField('Old Password', validators=[DataRequired()])
@@ -101,14 +102,14 @@ class ChangePasswordForm(FlaskForm):
         'New Password',
         validators=[
             DataRequired(),
-            Length(min=6, message="Password must have at least 6 characters")
+            Length(min=6, message="Password has less than 6 characters!")
         ]
     )
     confirm_new_password = PasswordField(
         'Confirm New Password',
         validators=[
             DataRequired(),
-            EqualTo('new_password', message="Passwords must match")
+            EqualTo('new_password', message="Passwords should match!")
         ]
     )
     submit = SubmitField('Change Password')

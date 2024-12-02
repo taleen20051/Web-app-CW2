@@ -16,6 +16,7 @@
 
     <!-- Link to the main Javascript file -->
     <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+
 </head>
 <body class="{% if request.endpoint == 'app.dashboard' %}dashboard-page
              {% elif request.endpoint == 'app.add_review' %}add-review-page

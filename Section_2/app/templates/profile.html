@@ -15,7 +15,7 @@
     {% if reviews|length == 0 %}
         <!-- Show message when there are no reviews on user's profile -->
         <div class="text-center">
-            <div class="empty-state">
+            <div class="empty-stage">
                 <h2>No Reviews by {{ user.username }} Yet!</h2>
             </div>
         </div>
@@ -31,9 +31,16 @@
                 <p><strong>Meal type:</strong> {{ review.meal }}</p>
                 <p><strong>Cuisine:</strong> {{ review.cuisine }}</p>
                 {% if review.comment %}
-                <p><strong>Comment:</strong> {{ review.comment }}</p>
+                    <p><strong>Comment:</strong> {{ review.comment }}</p>
                 {% endif %}
                 <p><strong>Rating:</strong> {{ review.rating }}/5</p>
+
+                <!-- Display message only if the review has been favorited by at least 1 user -->
+                {% if review.favorited_by.count() > 0 %}
+                    <p class="text-success">
+                        {{ review.favorited_by.count() }} user(s) added this review to their favorites!
+                    </p>
+                {% endif %}
 
                 <!-- Button group for website link, edit, delete, and favorite buttons -->
                 <div class="button-class">

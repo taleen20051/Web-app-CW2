@@ -162,7 +162,7 @@ body.edit-review-page {
 
 /* Entry Review Card's Styling */
 .review-card {
-    background: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+    background: rgba(0, 0, 0, 0.8);
     color: #fff;
     border-radius: 15px;
     padding: 30px;
@@ -238,7 +238,7 @@ body.edit-review-page {
 }
 
 /* Empty State Styling for when no entries available in page */
-.empty-state {
+.empty-stage {
     background-color: white;
     padding: 20px;
     border-radius: 10px;
@@ -251,7 +251,7 @@ body.edit-review-page {
 }
 
 /* Adjust Empty State for Profile Page */
-body.profile-page .empty-state {
+body.profile-page .empty-stage {
     position: relative;
     top: 100px;
     margin-top: 0;
@@ -446,7 +446,7 @@ mark:hover {
     display: relative;
 }
 
-.hero-container {
+.index-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -458,13 +458,13 @@ mark:hover {
 
 
 /* Home Page section buttons styling */
-.hero-container h1 {
+.index-container h1 {
     font-size: 32px;
     color: #000;
     margin-bottom: 20px;
 }
 
-.hero-container p {
+.index-container p {
     font-size: 20px;
     color: #000000;
     margin-bottom: 30px;
@@ -487,7 +487,8 @@ mark:hover {
 }
 
 .hover-box:hover {
-    background-color: #f9d342;
+    background-color: #f4c11c;
+    color: #000;
 }
 
 /* Favorites page Styling */
@@ -501,32 +502,32 @@ mark:hover {
     margin-top: 10px;
 }
 
-/* Adjust Labels and Inputs for Forms */
+/* Adjust Labels and Inputs for card fields */
 .form-class {
-    margin-bottom: 10px; /* Add more space between form fields */
+    margin-bottom: 10px;
     display: flex;
-    flex-direction: column; /* Stack label and input vertically */
-    align-items: flex-start; /* Align labels to the left */
+    flex-direction: column;
+    align-items: flex-start;
 }
 
-/* Ensure Labels and Inputs Are Clearly Aligned */
 .form-class label {
-    font-size: 16px; /* Increase label font size for clarity */
+    font-size: 16px;
     font-weight: bold;
-    margin-bottom: 10px; /* Add spacing between label and input */
+    margin-bottom: 10px;
 }
 
+/* Adjust font size and box sizing for card fields */
 .input-field {
     padding: 10px;
-    font-size: 16px; /* Larger input text */
+    font-size: 16px;
     border: 1px solid #ddd;
     border-radius: 5px;
-    width: 100%; /* Full width for better usability */
-    box-sizing: border-box; /* Include padding in width */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .login-btn {
-    margin-top: 20px; /* Space above the button */
+    margin-top: 20px;
     padding: 15px 20px;
     font-size: 16px;
     border-radius: 5px;
@@ -534,12 +535,17 @@ mark:hover {
 
 .form-class-inline {
     display: flex;
-    align-items: center; /* Align checkbox and label vertically */
-    gap: 8px; /* Add spacing between checkbox and label */
-    margin-top: 10px; /* Add some space above */
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
 }
 
 .form-class-inline input[type="checkbox"] {
-    width: auto; /* Adjust checkbox size */
-    margin: 0; /* Remove default margin */
+    width: auto;
+    margin: 0;
+}
+
+/* Adjust color for favorited reviews */
+.text-success {
+    color: #ffd900;
 }

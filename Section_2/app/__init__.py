@@ -6,27 +6,26 @@ db = SQLAlchemy()
 login_manager = LoginManager()
 
 
-# Application factory function
+# Initialization and configuration database
 def create_app():
     app = Flask(__name__)
-    app.config.from_object('config')  # Load configurations from config.py
+    app.config.from_object('config')
 
-    # Initialize the database with the Flask app
     db.init_app(app)
     login_manager.init_app(app)
     login_manager.login_view = 'app.login'
 
-    # Import and register the application blueprint
+    # show application blueprints
     from .views import app as app_blueprint
     app.register_blueprint(app_blueprint)
 
     with app.app_context():
-        db.create_all()  # Create tables in the database
+        db.create_all()
 
     return app
 
 
-# Callback function to load a user by their ID for Login
+# function to load a user by their ID characters to sign in
 @login_manager.user_loader
 def load_user(user_id):
     from .models import User

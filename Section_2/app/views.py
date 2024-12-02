@@ -74,7 +74,7 @@ def login():
         username = form.username.data
         password = form.password.data
 
-        # Authenticate the user with the provided credentials
+        # Authenticate the user with their provided credentials
         user = authenticate_user(username, password)
         if user:
             login_user(user)
@@ -88,7 +88,7 @@ def login():
 @app.route('/save/<int:restaurant_id>')
 @login_required
 def save_restaurant(restaurant_id):
-    # Fetch the restaurant and check if it's already saved to user's favorites
+    # Get the restaurant and check if it's already saved to user's favorites
     restaurant = Restaurant.query.get_or_404(restaurant_id)
     if restaurant not in current_user.saved_restaurants:
         current_user.saved_restaurants.append(restaurant)
@@ -207,7 +207,6 @@ def remove_from_favorites(review_id):
 @app.route('/favorites')
 @login_required
 def favorites():
-    # Directly use current_user.favorites since it's already a list-like object
     favorites = current_user.favorites
     return render_template('favorites.html', favorites=favorites)
 
@@ -227,7 +226,7 @@ def profile(username):
 def delete_review(review_id):
     review = Review.query.get_or_404(review_id)
 
-    # Ensure only the review's creator can delete it
+    # Make sure only the review's creator can delete the review
     if review.user_id != current_user.id:
         flash("You are not authorized to delete this review.", "danger")
         return redirect(url_for('app.profile', username=current_user.username))
@@ -243,11 +242,11 @@ def delete_review(review_id):
 def search_results():
     query = request.args.get('query', '').strip()
 
-    # If the query is empty, return an empty JSON response for AJAX
+    # If the bar is empty, don't show any search results
     if not query:
         return jsonify(results=[])
 
-    # Filter reviews using case-insensitive search
+    # Filter reviews by making them case-insensitive
     results = Review.query.filter(
         (Review.name.ilike(f"%{query}%")) |
         (Review.meal.ilike(f"%{query}%")) |
@@ -255,7 +254,7 @@ def search_results():
         (Review.comment.ilike(f"%{query}%"))
     ).all()
 
-    # For AJAX requests, return the results as JSON
+    # When user types, retuen response as JSON
     if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
         return jsonify(results=[{
             'id': review.id,
@@ -266,11 +265,11 @@ def search_results():
             'rating': review.rating
         } for review in results])
 
-    # Otherwise, render the full template for normal requests
+    # Otherwise, read the template for default results
     return render_template('search.html', reviews=results, query=query)
 
 
-# Route for Forgot Password page
+# Route for Reset Password page
 @app.route('/change_password', methods=['GET', 'POST'])
 def change_password():
     form = ChangePasswordForm()

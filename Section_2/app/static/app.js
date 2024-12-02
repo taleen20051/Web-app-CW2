@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Password visibility toggle
+    // Show Password when checkbox is clicked on
     const togglePassword = document.getElementById("togglePassword");
     if (togglePassword) {
         togglePassword.addEventListener("change", function () {
-            // Select all password fields with the class 'password-field'
+            // Show all password fields in the 'password-field' class
             const passwordFields = document.querySelectorAll(".password-field");
             passwordFields.forEach((field) => {
                 field.type = this.checked ? "text" : "password";
@@ -11,15 +11,15 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Form validation for login button
+    // Validates the login form to ensure both fields are filled correctly
     const loginForm = document.getElementById("loginForm");
     if (loginForm) {
-        // Ensures login form fields are filled before submitting
+        // Ensures login form fields are valid
         loginForm.addEventListener("submit", function (e) {
-            const username = document.getElementById("username").value.trim();
-            const password = document.getElementById("password").value.trim();
+            const username = document.getElementById("username")?.value.trim();
+            const password = document.getElementById("password")?.value.trim();
 
-            // Blocks submission if fields are empty
+            // Disable submit button if fields are empty
             if (!username || !password) {
                 e.preventDefault();
                 alert("Please enter both username and password.");
@@ -27,19 +27,20 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 
-    // Favorites functionality
+    // Favorites functionality for reviews
     document.querySelectorAll(".favorite-btn").forEach((button) => {
         button.addEventListener("click", (e) => {
             e.preventDefault();
             const card = e.target.closest(".review-card");
             const reviewId = card.dataset.id;
 
-            // Sends a request to add the review to favorites and displays an alert
+            // Sends a request to add the review to favorites and shows an alert depending on user action
             fetch(`/add_to_favorites/${reviewId}`, {
                 method: "POST",
             })
                 .then((response) => response.json())
                 .then((data) => {
+                    // Adds to favorites if not already in favorites, shows alert otherwise
                     if (data.message === "Already in favorites") {
                         alert("This item is already in your favorites!");
                     } else if (data.message === "Added to favorites") {
@@ -61,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const card = e.target.closest(".review-card");
             const reviewId = card.dataset.id;
 
-            // Sends a request to remove the review from favorites and displays an alert
+            // Sends a request to remove the review from favorites and shows an alert
             fetch(`/remove_from_favorites/${reviewId}`, {
                 method: "POST",
             })
@@ -83,11 +84,11 @@ document.addEventListener("DOMContentLoaded", function () {
     // Delete functionality
     document.querySelectorAll(".delete-btn").forEach((button) => {
         button.addEventListener("click", (e) => {
-            e.preventDefault(); // Prevent default form submission behavior
+            e.preventDefault();
             const card = e.target.closest(".review-card");
             const reviewId = card.dataset.id;
 
-            // Confirms deletion before sending a delete request
+            // Confirms deletion after sending a delete request and shows error in any other case
             if (confirm("Are you sure you want to delete this review?")) {
                 fetch(`/delete_review/${reviewId}`, {
                     method: "POST",
@@ -108,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    // Search functionality with real-time AJAX
+    // Search functionality using AJAX
     const searchInput = document.getElementById("search-input");
 
     if (searchInput) {
@@ -116,24 +117,22 @@ document.addEventListener("DOMContentLoaded", function () {
             const query = searchInput.value.toLowerCase().trim();
             const cards = document.querySelectorAll(".review-card");
 
-            // If the search query is empty, display all cards and reset highlights
+            // If the search bar has no character input, show all cards and remove highlights
             if (!query) {
                 const noResultsMessage = document.getElementById("no-results-message");
-
-                // Show all cards and reset highlights
                 cards.forEach((card) => {
                     card.style.display = "flex";
                     resetHighlights(card);
                 });
 
-                // Remove "No results found" message if it exists
+                // Remove "No results found" message if the character typed in exists in a card
                 if (noResultsMessage) {
                     noResultsMessage.remove();
                 }
-                return; // Exit the function early since no search is needed
+                return;
             }
 
-            // Send an AJAX request to the search_results endpoint
+            // Send an AJAX request to search results
             fetch(`/search_results?query=${encodeURIComponent(query)}`, {
                 method: "GET",
                 headers: {
@@ -144,7 +143,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 .then((data) => {
                     let hasResults = false;
 
-                    // Show/hide cards based on the returned IDs
+                    // Show/hide cards based on the characters inputted
                     cards.forEach((card) => {
                         const reviewId = parseInt(card.dataset.id);
                         if (data.results.some(result => result.id === reviewId)) {
@@ -156,7 +155,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         }
                     });
 
-                    // Handle no results message
+                    // Show no results message if no results are found
                     const noResultsMessage = document.getElementById("no-results-message");
                     if (!hasResults) {
                         if (!noResultsMessage) {
@@ -176,7 +175,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
         });
 
-        // Function to highlight card matches in the text
+        // Function to highlight matching characters in the text
         function highlightMatches(card, query) {
             const elements = card.querySelectorAll("h3, p, strong");
             elements.forEach((el) => {
@@ -184,7 +183,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 const regex = new RegExp(`(${query})`, "gi");
 
                 if (el.tagName === "STRONG") {
-                    // Keeps bold styling for <strong> elements
                     el.innerHTML = originalText;
                 } else {
                     el.innerHTML = originalText.replace(regex, "<mark>$1</mark>");
@@ -192,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        // Function to reset highlights to original text
+        // Function to bring back highlighted characters to original text
         function resetHighlights(card) {
             const elements = card.querySelectorAll("h3, p, strong");
             elements.forEach((el) => {
